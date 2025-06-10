@@ -2,19 +2,18 @@ import { useState } from "react";
 import { useNavigate, useParams, Link } from "react-router-dom";
 
 export default function Register() {
-  const { role } = useParams(); // student, instructor, admin
+  const { role } = useParams(); 
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState(""); // required for instructor/admin
+  const [password, setPassword] = useState(""); 
   const [message, setMessage] = useState("");
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     try {
-      // For students, generate a dummy password
       const payload = {
         name,
         email,
