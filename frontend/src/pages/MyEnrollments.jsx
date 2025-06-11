@@ -58,13 +58,12 @@ export default function MyEnrollments() {
 
       if (!res.ok) throw new Error("Failed to delete enrollment");
 
-      // ✅ Sync with localStorage
       const current = JSON.parse(localStorage.getItem("enrolled-course-ids") || "[]");
       const updated = current.filter((id) => id !== courseId);
       localStorage.setItem("enrolled-course-ids", JSON.stringify(updated));
 
       alert("✅ Unenrolled successfully!");
-      fetchMyEnrollments(); // Refresh list
+      fetchMyEnrollments(); 
     } catch (err) {
       console.error("❌ Delete error:", err.message);
       alert("❌ Failed to delete: " + err.message);

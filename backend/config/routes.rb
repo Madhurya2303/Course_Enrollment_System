@@ -3,8 +3,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      # get 'my_enrollments', to: 'enrollments#my_enrollments'
-      resources :courses, only: [:index]
+      resources :courses , only: [:index, :create, :destroy]
       resources :enrollments, only: [:create, :destroy] 
       get 'my_enrollments', to: 'enrollments#my_enrollments'
     end

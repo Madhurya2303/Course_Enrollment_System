@@ -9,7 +9,6 @@ export default function CourseList() {
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("user-id");
-  const userName = localStorage.getItem("user-name") || "User";
 
   const getAuthHeaders = () => {
     const token = localStorage.getItem("access-token");
@@ -62,7 +61,6 @@ export default function CourseList() {
 
       setEnrolledCourseIds(ids);
 
-      // Save per-user enrollments to localStorage
       const all = JSON.parse(localStorage.getItem("user-enrollments") || "{}");
       all[userId] = ids;
       localStorage.setItem("user-enrollments", JSON.stringify(all));
@@ -90,33 +88,38 @@ export default function CourseList() {
       const all = JSON.parse(localStorage.getItem("user-enrollments") || "{}");
       all[userId] = updated;
       localStorage.setItem("user-enrollments", JSON.stringify(all));
+
+      await fetchCourses(); // refresh course list
     } catch (err) {
       alert("❌ " + err.message);
     }
   };
 
   const handleDelete = async (courseId) => {
-    const headers = getAuthHeaders();
-    if (!headers) return alert("❌ Not authenticated.");
+  const headers = getAuthHeaders();
+  if (!headers) return alert("❌ Not authenticated.");
 
-    try {
-      const res = await fetch(`http://localhost:3000/api/v1/enrollments/${courseId}`, {
-        method: "DELETE",
-        headers,
-      });
+  try {
+    const res = await fetch(`http://localhost:3000/api/v1/enrollments/${courseId}`, {
+      method: "DELETE",
+      headers,
+    });
 
-      if (!res.ok) throw new Error("Failed to delete enrollment");
+    if (!res.ok) throw new Error("Failed to delete enrollment");
 
-      const updated = enrolledCourseIds.filter(id => id !== courseId);
-      setEnrolledCourseIds(updated);
+    const updated = enrolledCourseIds.filter(id => id !== courseId);
+    setEnrolledCourseIds(updated);
 
-      const all = JSON.parse(localStorage.getItem("user-enrollments") || "{}");
-      all[userId] = updated;
-      localStorage.setItem("user-enrollments", JSON.stringify(all));
-    } catch (err) {
-      alert("❌ " + err.message);
-    }
-  };
+    const all = JSON.parse(localStorage.getItem("user-enrollments") || "{}");
+    all[userId] = updated;
+    localStorage.setItem("user-enrollments", JSON.stringify(all));
+
+    await fetchCourses(); // 🔁 Refresh course count
+  } catch (err) {
+    alert("❌ " + err.message);
+  }
+};
+
 
   const handleLogout = () => {
     localStorage.removeItem("access-token");
@@ -183,6 +186,9 @@ export default function CourseList() {
               <p className="text-gray-600 text-sm">{course.description}</p>
               <p className="text-sm text-gray-500">Credit Hours: {course.credit_hours}</p>
               <p className="text-sm text-gray-500">Capacity: {course.capacity}</p>
+              <p className="text-sm text-gray-500">
+                👨‍🎓 Enrolled: <strong>{course.students_count}</strong> / {course.capacity}
+              </p>
             </div>
             <div className="mt-2 flex flex-wrap gap-2">
               {enrolledCourseIds.includes(course.id) ? (
@@ -195,6 +201,13 @@ export default function CourseList() {
                     Delete
                   </button>
                 </>
+              ) : course.students_count >= course.capacity ? (
+                <button
+                  disabled
+                  className="bg-gray-400 text-white text-sm px-3 py-1 rounded cursor-not-allowed"
+                >
+                  Full
+                </button>
               ) : (
                 <button
                   onClick={() => handleEnroll(course.id)}

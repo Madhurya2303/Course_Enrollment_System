@@ -5,7 +5,15 @@ const Intro = () => {
   const navigate = useNavigate();
 
   const handleLogin = (role) => {
-    navigate(`/login/${role}`);
+    if (role === "admin") {
+      navigate("/admin-login");
+    } else {
+      navigate(`/login/${role}`);
+    }
+  };
+
+  const handleRegister = (role) => {
+    navigate(`/register/${role}`);
   };
 
   return (
