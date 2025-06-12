@@ -47,9 +47,11 @@ cd backend
 bundle install
 rails db:create db:migrate db:seed
 rails s -p 3000
+```
 
 Frontend:
 ```bash
 cd frontend
 npm install
 npm run dev
+```
