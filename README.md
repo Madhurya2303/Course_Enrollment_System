@@ -1,4 +1,4 @@
-# 🎓 Course Enrollment System
+#  Course Enrollment System
 
 This is a full-stack web application that allows students to register and enroll in courses, while admins and instructors can manage courses. It is built using:
 
@@ -27,7 +27,7 @@ This is a full-stack web application that allows students to register and enroll
 
 ---
 
-## 🧑‍💻 Technologies Used
+##  Technologies Used
 
 - **React** (Frontend)
 - **Tailwind CSS** (Styling)
