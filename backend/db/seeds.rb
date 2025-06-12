@@ -3,6 +3,9 @@ Course.delete_all
 Instructor.delete_all
 User.where(role: 'student').delete_all
 
+ActiveRecord::Base.connection.execute("ALTER TABLE instructors AUTO_INCREMENT = 1;")
+ActiveRecord::Base.connection.execute("ALTER TABLE courses AUTO_INCREMENT = 1;")
+
 instructor_names = [
   "John Smith", "Alice Johnson", "Robert Brown", "Emily Davis",
   "Michael Wilson", "Sarah Taylor", "David Anderson", "Laura Martinez"
@@ -11,7 +14,11 @@ instructor_names = [
 instructors = instructor_names.map.with_index(1) do |name, i|
   Instructor.create!(
     name: name,
-    email: "instructor#{i}@example.com"
+    email: "instructor#{i}@example.com",
+    password: "password123",
+    password_confirmation: "password123",
+    instructor_secret: "@instructor123",
+    instructor_code: "i#{i}"
   )
 end
 

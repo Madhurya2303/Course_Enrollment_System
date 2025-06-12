@@ -11,7 +11,7 @@ export default function Login() {
     e.preventDefault();
 
     try {
-      const res = await fetch("http://localhost:3000/auth/sign_in", {
+      const res = await fetch("http://localhost:3000/api/v1/auth/sign_in", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),

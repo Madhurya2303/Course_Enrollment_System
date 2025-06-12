@@ -7,8 +7,10 @@ const Intro = () => {
   const handleLogin = (role) => {
     if (role === "admin") {
       navigate("/admin-login");
-    } else {
-      navigate(`/login/${role}`);
+    } else if (role === "instructor") {
+      navigate("/login/instructor");
+    } else if (role === "student") {
+      navigate("/login/student");
     }
   };
 

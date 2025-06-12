@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_10_182820) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_11_175232) do
   create_table "courses", charset: "utf8mb3", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -34,6 +34,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_10_182820) do
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider", default: "email", null: false
+    t.string "uid", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.json "tokens"
+    t.string "instructor_secret"
+    t.string "instructor_code"
+    t.index ["uid", "provider"], name: "index_instructors_on_uid_and_provider", unique: true
   end
 
   create_table "users", charset: "utf8mb3", force: :cascade do |t|

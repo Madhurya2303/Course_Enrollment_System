@@ -44,7 +44,7 @@ export default function Register() {
         password_confirmation: role === "student" ? dummyPassword : confirmPassword,
       };
 
-      const res = await fetch("http://localhost:3000/auth", {
+      const res = await fetch("http://localhost:3000/api/v1/auth", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -75,7 +75,7 @@ export default function Register() {
       }
 
       alert("✅ Registration successful! You can now log in.");
-      navigate(`/login/${role}`);
+      navigate(`/login/student`);
     } catch (err) {
       console.error("Registration error:", err);
       setMessages(["❌ Registration failed. Please try again."]);
@@ -162,7 +162,7 @@ export default function Register() {
         <p className="text-center text-sm text-gray-600 mt-4">
           Already registered?{" "}
           <Link
-            to={`/login/${role}`}
+            to={`/login/student`}
             className="text-blue-600 hover:underline font-medium"
           >
             Login here
