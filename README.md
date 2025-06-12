@@ -8,19 +8,19 @@ This is a full-stack web application that allows students to register and enroll
 
 ---
 
-## 🔧 Features
+##  Features
 
-### 👨‍🎓 Student
+###  Student
 - Login / Register
 - View available courses
 - Enroll and Unenroll from courses
 - View enrolled courses
 
-### 👩‍🏫 Instructor
+###  Instructor
 - Login/Registration with secret code
 - Can view Instructor Dashboard (optional features)
 
-### 👮‍♂️ Admin
+###  Admin
 - Login
 - Can add or delete courses
 - Can view all courses and enrolled student counts
