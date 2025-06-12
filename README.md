@@ -11,18 +11,17 @@ This is a full-stack web application that allows students to register and enroll
 ## 🔧 Features
 
 ### 👨‍🎓 Student
-- Register without password
-- Login using email only
+- Login / Register
 - View available courses
 - Enroll and Unenroll from courses
 - View enrolled courses
 
 ### 👩‍🏫 Instructor
-- Login/Registration with secret code `@instructor123`
+- Login/Registration with secret code
 - Can view Instructor Dashboard (optional features)
 
 ### 👮‍♂️ Admin
-- Login with email: `admin@login.com` & password: `admin123`
+- Login
 - Can add or delete courses
 - Can view all courses and enrolled student counts
 
@@ -40,8 +39,6 @@ This is a full-stack web application that allows students to register and enroll
 
 ---
 
-## 🚀 Getting Started
-
 ### Backend Setup
 
 ```bash
@@ -50,6 +47,9 @@ bundle install
 rails db:create db:migrate db:seed
 rails s -p 3000
 
+### Frontend Setup
+
+```bash
 cd frontend
 npm install
 npm run dev
