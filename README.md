@@ -1,6 +1,6 @@
 #  Course Enrollment System
 
-This is a full-stack web application that allows students to register and enroll in courses, while admins and instructors can manage courses. It is built using:
+This is a full-stack web application with CRUD operations that allows students to register and enroll in courses, while admins and instructors can manage courses. It is built using:
 
 - **Frontend**: React + Tailwind CSS
 - **Backend**: Ruby on Rails 8 (API mode) with MySQL
