@@ -35,16 +35,14 @@ export default function Register() {
     }
 
     try {
-      const dummyPassword = "student_dummy_password";
-
       const payload = {
         name,
         email,
-        password: role === "student" ? dummyPassword : password,
-        password_confirmation: role === "student" ? dummyPassword : confirmPassword,
+        password,
+        password_confirmation:confirmPassword,
       };
 
-      const res = await fetch("http://localhost:3000/api/v1/auth", {
+      const res = await fetch("http://localhost:3000/api/v1/auth", { //posting to backend API
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -57,7 +55,7 @@ export default function Register() {
 
         if (data.errors && typeof data.errors === "object") {
           Object.entries(data.errors).forEach(([field, msgs]) => {
-            if (field === "full_messages") return; // 🚫 Ignore this key
+            if (field === "full_messages") return; 
             msgs.forEach((msg) => {
               errors.add(`❌ ${capitalize(field)} ${msg}`);
             });

@@ -1,0 +1,39 @@
+# 🎓 Course Enrollment System
+
+A full-stack Course Enrollment System built with:
+
+- 🔧 **Backend**: Ruby on Rails 8 with Devise Token Auth & MySQL
+- 🎨 **Frontend**: React (Vite) with Tailwind CSS
+- 🔐 **Authentication**: Token-based login for Students, Instructors, and Admins
+
+---
+
+## 🚀 Features
+
+- 👨‍🎓 Student registration (without password)
+- 👩‍🏫 Instructor registration/login (with secret code)
+- 🧑‍💼 Admin login to manage courses
+- 📚 Browse and enroll in courses
+- ✅ Prevent over-enrollment based on course capacity
+- 👀 View enrolled courses
+- 🗑️ Unenroll from courses
+- 🧮 Real-time update of enrolled student count
+- 🔐 Role-based access for Student, Instructor, Admin
+
+---
+
+## 🛠️ Technologies Used
+
+| Stack | Tech |
+|-------|------|
+| Frontend | React, Tailwind CSS, React Router |
+| Backend | Ruby on Rails 8, MySQL |
+| Auth | Devise Token Auth |
+| API | RESTful APIs with token headers |
+
+---
+
+## 📁 Project Structure
+
+
+

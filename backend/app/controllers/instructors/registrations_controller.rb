@@ -1,21 +1,17 @@
 module Instructors
   class RegistrationsController < DeviseTokenAuth::RegistrationsController
-    before_action :validate_instructor_secret, only: [:create]
+    before_action :validate_instructor_is_not_a_user, only: [:create]
 
     private
-
-    def validate_instructor_secret
-      unless params[:instructor_secret] == '@instructor123'
-        render json: { errors: ['Invalid instructor secret code'] }, status: :unprocessable_entity
-      end
-    end
 
     def sign_up_params
       params.permit(:email, :password, :password_confirmation, :name)
     end
 
-    def account_update_params
-      params.permit(:email, :password, :password_confirmation, :name)
+    def validate_instructor_is_not_a_user
+      if User.find_by(email: sign_up_params[:email]) 
+        render json: { errors: ['An account with this email already exists as student.'] }, status: :unprocessable_entity
+      end
     end
   end
 end

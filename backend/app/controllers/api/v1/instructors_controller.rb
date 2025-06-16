@@ -22,6 +22,7 @@ module Api
         }
       end
 
+      # return id,name of instructors
       def index
         instructors = Instructor.all
         render json: instructors.select(:id, :name)

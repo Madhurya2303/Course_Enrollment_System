@@ -17,7 +17,6 @@ instructors = instructor_names.map.with_index(1) do |name, i|
     email: "instructor#{i}@example.com",
     password: "password123",
     password_confirmation: "password123",
-    instructor_secret: "@instructor123",
     instructor_code: "i#{i}"
   )
 end

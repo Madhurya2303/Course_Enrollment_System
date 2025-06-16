@@ -37,6 +37,7 @@ export default function AdminDashboard() {
       });
       updateAuthHeaders(res);
       const data = await res.json();
+      // if present gives else return empty array
       setCourses(Array.isArray(data) ? data : []);
     } catch (err) {
       console.error("Error fetching courses:", err);
@@ -44,6 +45,7 @@ export default function AdminDashboard() {
     }
   };
 
+  //  runs when you add a new course.
   const handleAddCourse = async (e) => {
     e.preventDefault();
     try {
@@ -94,7 +96,7 @@ export default function AdminDashboard() {
       });
 
       updateAuthHeaders(res);
-
+      // del course if res.ok - if del was success
       if (res.ok) {
         setCourses(courses.filter((course) => course.id !== id));
       } else {

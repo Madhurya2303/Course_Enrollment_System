@@ -11,15 +11,14 @@ export default function InstructorLogin() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [name, setName] = useState('');
-  const [instructorSecret, setInstructorSecret] = useState('');
   const [error, setError] = useState('');
 
+  // clears after reg - success
   const resetForm = () => {
     setEmail('');
     setPassword('');
     setConfirmPassword('');
     setName('');
-    setInstructorSecret('');
     setError('');
   };
 
@@ -48,7 +47,6 @@ export default function InstructorLogin() {
           password,
           password_confirmation: confirmPassword,
           name,
-          instructor_secret: instructorSecret,
         };
 
     try {
@@ -58,7 +56,7 @@ export default function InstructorLogin() {
         body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
+      const data = await response.json(); //parses response from  API as json
 
       if (response.ok) {
         if (isLogin) {
@@ -72,7 +70,7 @@ export default function InstructorLogin() {
           resetForm();
           setIsLogin(true);
         }
-      } else {
+      } else { //if attempt fails 
         const errorMsg =
           data.errors?.full_messages?.[0] ||
           data.errors?.[0] ||
@@ -91,7 +89,8 @@ export default function InstructorLogin() {
         <div className="flex flex-col items-center mb-6">
           <FaChalkboardTeacher size={40} className="text-blue-700 mb-2" />
           <h2 className="text-2xl font-bold text-blue-700">
-            {isLogin ? 'Instructor Login' : 'Instructor Registration'}
+            {/* title */}
+            {isLogin ? 'Instructor Login' : 'Instructor Registration'}  
           </h2>
         </div>
 
@@ -154,19 +153,6 @@ export default function InstructorLogin() {
                   />
                 </div>
               </div>
-
-              <div>
-                <label className="block text-gray-700 mb-1">Instructor Secret Code</label>
-                <div className="flex items-center border rounded px-3 py-2 bg-gray-50">
-                  <GiSecretBook className="text-gray-500 mr-2" />
-                  <input
-                    className="w-full bg-transparent outline-none"
-                    value={instructorSecret}
-                    onChange={(e) => setInstructorSecret(e.target.value)}
-                    required
-                  />
-                </div>
-              </div>
             </>
           )}
 
@@ -181,7 +167,7 @@ export default function InstructorLogin() {
 
           <p
             onClick={() => {
-              setIsLogin(!isLogin);
+              setIsLogin(!isLogin); // toggle-login/reg
               setError('');
             }}
             className="text-sm text-blue-600 text-center mt-4 cursor-pointer hover:underline"

@@ -3,6 +3,7 @@ class Api::V1::CoursesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :authenticate_admin!, only: [:create, :destroy]
 
+  # load courses from db - include instructor & enroll
   def index
     courses = Course.includes(:instructor, :enrollments).order(created_at: :desc)
 
@@ -15,7 +16,7 @@ class Api::V1::CoursesController < ApplicationController
         capacity: course.capacity,
         instructor_id: course.instructor_id,
         students_count: course.students_count,
-        instructor_name: course.instructor&.name
+        instructor_name: course.instructor.name
       }
     }
   end
@@ -30,10 +31,10 @@ class Api::V1::CoursesController < ApplicationController
         description: course.description,
         capacity: course.capacity,
         credit_hours: course.credit_hours,
-        instructor_name: course.instructor&.name
+        instructor_name: course.instructor.name
       }, status: :created
     else
-      Rails.logger.debug(course.errors.full_messages) # Add this
+      Rails.logger.debug(course.errors.full_messages)
       render json: { errors: course.errors.full_messages }, status: :unprocessable_entity
     end
   end

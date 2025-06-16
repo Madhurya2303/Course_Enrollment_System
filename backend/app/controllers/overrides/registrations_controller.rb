@@ -1,4 +1,3 @@
-# app/controllers/overrides/registrations_controller.rb
 class Overrides::RegistrationsController < DeviseTokenAuth::RegistrationsController
   private
 

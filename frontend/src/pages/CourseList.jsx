@@ -24,7 +24,7 @@ export default function CourseList() {
   const navigate = useNavigate();
 
   const userId = localStorage.getItem("user-id");
-
+  // retrieve authentication credentials from localStorage
   const getAuthHeaders = () => {
     const token = localStorage.getItem("access-token");
     const client = localStorage.getItem("client");
@@ -49,6 +49,7 @@ export default function CourseList() {
 
     try {
       setLoading(true);
+      // fetch courses
       const res = await fetch("http://localhost:3000/api/v1/courses", { headers });
       if (!res.ok) throw new Error("Failed to fetch courses");
 
@@ -72,7 +73,7 @@ export default function CourseList() {
       const data = await res.json();
       const ids = data.map(course => course.id);
       setEnrolledCourseIds(ids);
-
+      // if nothing is returned, set it to empty array
       const all = JSON.parse(localStorage.getItem("user-enrollments") || "{}");
       all[userId] = ids;
       localStorage.setItem("user-enrollments", JSON.stringify(all));
@@ -86,6 +87,7 @@ export default function CourseList() {
     if (!headers) return alert("❌ Not authenticated.");
 
     try {
+      // send a POST request to create a new enrollment
       const res = await fetch("http://localhost:3000/api/v1/enrollments", {
         method: "POST",
         headers,
